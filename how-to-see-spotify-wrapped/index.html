@@ -60,8 +60,20 @@
     </style>
 </head>
 <body class="bg-white text-gray-800">
-    <!-- Blog Post Content -->
-    <article class="max-w-4xl mx-auto px-6 py-20">
+<!-- Header/Navigation -->
+<header class="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm shadow-sm z-50">
+    <div class="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
+        <a href="/" class="flex items-center space-x-2 text-gray-900 hover:text-spotify-green transition-colors">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+            </svg>
+            <span class="font-medium">Back to Home</span>
+        </a>
+    </div>
+</header>
+
+<!-- 调整主内容区域的上边距，为fixed header留出空间 -->
+<article class="max-w-4xl mx-auto px-6 pt-28 pb-20">
         <header class="mb-12">
             <h1 class="text-4xl md:text-5xl font-bold mb-6 text-gray-900">How to See Spotify Wrapped 2024: Complete Guide</h1>
             <div class="flex items-center text-gray-600 mb-8">
@@ -361,9 +373,7 @@
                             </ul>
                         </div>
                         
-                        <div class="relative aspect-video rounded-xl overflow-hidden">
-                            <img src="stats-tracking.jpg" alt="Spotify Stats Tracking Tools" class="w-full h-full object-cover">
-                        </div>
+
                     </div>
                 </div>
             </section>
