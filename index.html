@@ -3,491 +3,698 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spotify Wrapped 2024</title>
+    <!-- SEO Title - 保持在60个字符以内 -->
+    <title>Spotify Wrapped 2024: Your Complete Guide to Music Insights | Official</title>
+    
+    <!-- Meta Description - 保持在155个字符以内 -->
+    <meta name="description" content="Discover your year in music with Spotify Wrapped 2024. Explore AI-powered insights, personalized stats, and share your musical journey. Get the complete guide to new features and trends.">
+    
+    <!-- Canonical URL - 防止重复内容 -->
+    <link rel="canonical" href="https://yourdomain.com/spotify-wrapped-2024" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        spotify: {
+                            green: '#1DB954',
+                            black: '#191414',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .music-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 20.5c-7.2 0-13 5.8-13 13s5.8 13 13 13 13-5.8 13-13-5.8-13-13-13zm0 2c6.1 0 11 4.9 11 11s-4.9 11-11 11-11-4.9-11-11 4.9-11 11-11z' fill='rgba(255,255,255,0.1)' fill-rule='evenodd'/%3E%3C/svg%3E");
         }
 
-        @keyframes gradientFlow {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-
-        .animate-fade-up {
-            animation: fadeUp 0.8s ease-out forwards;
-        }
-
-        .gradient-animate {
-            background: linear-gradient(45deg, #1DB954, #191414, #1ED760);
-            background-size: 200% 200%;
-            animation: gradientFlow 10s ease infinite;
-        }
-
-        .card-hover {
-            transition: transform 0.3s ease;
-        }
-
-        .card-hover:hover {
-            transform: translateY(-10px);
-        }
-
-        .hero-gradient {
-            background: linear-gradient(135deg, #4B25A9, #37B6E9, #FFE100);
-            background-size: 200% 200%;
-            animation: gradientFlow 10s ease infinite;
+        .wave-pattern {
             position: relative;
             overflow: hidden;
         }
 
-        .zigzag-overlay {
+        .wave-pattern::before {
+            content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(45deg, transparent 49.5%, #FFE100 49.5%, #FFE100 50.5%, transparent 50.5%),
-                        linear-gradient(-45deg, transparent 49.5%, #37B6E9 49.5%, #37B6E9 50.5%, transparent 50.5%);
-            background-size: 60px 60px;
-            opacity: 0.3;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='20' viewBox='0 0 100 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 10 Q 25 20, 50 10 T 100 10' stroke='rgba(255,255,255,0.1)' fill='none'/%3E%3C/svg%3E");
+            opacity: 0.2;
         }
 
-        .hero-content {
+        /* 背景图片相关样式 */
+        .bg-section {
             position: relative;
-            z-index: 10;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
 
-        .spotify-logo {
-            width: 40px;
-            height: 40px;
-            display: inline-block;
-            vertical-align: middle;
-            margin-right: 8px;
+        .bg-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.2); /* 降低遮罩透明度 */
+            z-index: 1;
         }
 
-        .wrapped-text {
-            font-size: 8rem;
-            font-weight: 900;
-            letter-spacing: -2px;
-            line-height: 1;
+        .bg-section > * {
+            position: relative;
+            z-index: 2;
         }
 
-    .content-section {
-        background: linear-gradient(to bottom, #FFE100 50%, #000000 50%);
-        position: relative;
-        padding: 4rem 0;
-    }
+        /* 移动端优化 */
+        @media (max-width: 768px) {
+            .text-7xl {
+                font-size: 3rem;
+            }
+            
+            .text-5xl {
+                font-size: 2.5rem;
+            }
+            
+            .text-2xl {
+                font-size: 1.25rem;
+            }
 
-    .content-menu {
-        position: fixed;
-        right: 2rem;
-        top: 50%;
-        transform: translateY(-50%);
-        background: #000;
-        padding: 1.5rem;
-        border-radius: 1rem;
-        z-index: 40;
-    }
+            .px-12 {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
 
-    .content-menu a {
-        display: block;
-        color: white;
-        text-decoration: none;
-        margin: 1rem 0;
-        font-weight: bold;
-        transition: color 0.3s ease;
-    }
-
-    .content-menu a:hover {
-        color: #1DB954;
-    }
-
-    .gradient-text {
-        background: linear-gradient(45deg, #37B6E9, #4B25A9);
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-        font-size: 3.5rem;
-        font-weight: 900;
-        line-height: 1.2;
-    }
-
-    .wrapped-banner {
-        background: linear-gradient(90deg, #37B6E9, #000);
-        color: white;
-        padding: 2rem;
-        font-size: 2rem;
-        font-weight: bold;
-        transform: skew(-15deg);
-        margin: 2rem 0;
-    }
-
-    .wrapped-banner span {
-        display: block;
-        transform: skew(15deg);
-    }
-
-    .read-more-btn {
-        position: relative;
-        overflow: hidden;
-        transition: all 0.3s ease;
-    }
-
-    .read-more-btn:hover {
-        transform: scale(1.05);
-    }
-
-    section {
-        will-change: transform;
-        transform-style: preserve-3d;
-        backface-visibility: hidden;
-    }
-
-    .scroll-section {
-        position: relative;
-        z-index: 1;
-        transition: transform 0.1s ease-out;
-    }
-
-    .section-divider {
-        height: 4rem;
-        background: linear-gradient(to bottom, 
-            rgba(0,0,0,0) 0%,
-            rgba(0,0,0,0.2) 50%,
-            rgba(0,0,0,0) 100%
-        );
-        position: relative;
-        z-index: 2;
-    }
-
-    .content-container {
-        position: relative;
-        z-index: 2;
-        opacity: 0;
-        transform: translateY(30px);
-        transition: all 0.6s ease-out;
-    }
-
-    .content-container.visible {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    .wave-shape {
-        position: absolute;
-        right: -10%;
-        bottom: -20%;
-        width: 100%;
-        height: 120%;
-        z-index: 1;
-        transform: scale(1.2);
-    }
-
-    .geometric-shape {
-        position: absolute;
-        left: -10%;
-        top: 0;
-        width: 120%;
-        height: 120%;
-        z-index: 1;
-        transform: scale(1.3);
-    }
-
-    .ai-wave {
-        position: absolute;
-        right: -20%;
-        top: -10%;
-        width: 140%;
-        height: 120%;
-        z-index: 1;
-        transform: scale(1.4);
-    }
+            .py-6 {
+                padding-top: 1rem;
+                padding-bottom: 1rem;
+            }
+        }
     </style>
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
 </head>
-<body class="bg-black text-white">
+<body class="bg-spotify-black text-white min-h-screen">
     <!-- 导航栏 -->
-    <nav class="fixed top-0 w-full bg-black/90 backdrop-blur-sm z-50">
-        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="text-2xl font-bold">Your Brand</div>
-            <div class="space-x-6">
-                <a href="#" class="hover:text-green-400">News</a>
-                <a href="#" class="hover:text-green-400">Company</a>
-                <a href="#" class="hover:text-green-400">About</a>
-            </div>
-        </div>
+    <nav class="fixed w-full z-50 bg-spotify-black/90 backdrop-blur-md p-6">
+        <img src="logo.jpg" alt="Spotify" class="h-10">
     </nav>
 
-    <!-- 主要内容区域 -->
-    <main class="pt-20">
-        <!-- 英雄区域 -->
-        <section class="min-h-screen flex items-center justify-center hero-gradient">
-            <div class="zigzag-overlay"></div>
-            <div class="hero-content text-center opacity-0 animate-fade-up">
-                <div class="flex items-center justify-center mb-8">
-                    <img src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_Black.png" 
-                         alt="Spotify" 
-                         class="spotify-logo">
-                    <span class="text-4xl font-bold">2024</span>
+    <!-- Hero Section -->
+    <section class="min-h-screen px-6 flex items-center justify-center bg-section" 
+        style="background-image: url('3.gif');">
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="floating-notes">
+                <svg class="absolute top-1/4 left-1/4 w-8 h-8 text-white/10" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                </svg>
+            </div>
+        </div>
+        <div data-aos="fade-up" class="text-center pt-20 relative z-10">
+            <h1 class="text-7xl font-bold mb-6 animate-fade-in">Wrapped 2024</h1>
+            <p class="text-2xl mb-8 animate-slide-up">Your year in music starts now</p>
+            <a href="https://spotify.com/wrapped" 
+               class="inline-block bg-spotify-green px-8 py-4 rounded-full text-lg font-bold 
+                      hover:bg-opacity-90 transform hover:scale-105 transition-all mb-12">
+                See Your Wrapped
+            </a>
+            <div class="animate-bounce mt-12">
+                <span class="block text-sm mb-2">Scroll to explore</span>
+                <svg class="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- What's in Store -->
+    <section class="min-h-screen relative flex items-center bg-section" 
+        style="background-image: url('1.gif');">
+        <div class="max-w-6xl mx-auto px-6 py-20" data-aos="fade-left">
+            <h2 class="text-5xl font-bold mb-8">What's In Store for 2024</h2>
+            <p class="text-xl mb-12 max-w-2xl">Get ready for an entirely new Wrapped experience. New features, deeper insights, and more ways to discover your music identity.</p>
+            <a href="https://newsroom.spotify.com/2024-12-04/wrapped-user-experience-2024/" class="inline-block bg-spotify-green px-8 py-4 rounded-full text-lg hover:bg-opacity-80 transform hover:scale-105 transition-all">
+                Learn More
+            </a>
+        </div>
+    </section>
+
+    <!-- Top Lists -->
+    <section class="min-h-screen relative flex items-center bg-section" 
+        style="background-image: url('2.gif');">
+        <div class="max-w-6xl mx-auto px-6 py-20" data-aos="fade-right">
+            <h2 class="text-5xl font-bold mb-8">Global Listening Trends</h2>
+            <p class="text-xl mb-12 max-w-2xl">Dive into the sounds that shaped 2024. Explore the most streamed artists, songs, and podcasts around the world.</p>
+            <a href="https://newsroom.spotify.com/2024-12-04/top-songs-artists-podcasts-audiobooks-albums-trends-2024/" class="inline-block bg-spotify-green px-8 py-4 rounded-full text-lg hover:bg-opacity-80 transform hover:scale-105 transition-all">
+                View Top Lists
+            </a>
+        </div>
+    </section>
+
+    <!-- AI Experiences -->
+    <section class="min-h-screen relative flex items-center bg-section" 
+        style="background-image: url('3.png');">
+        <div class="max-w-6xl mx-auto px-6 py-20" data-aos="fade-left">
+            <h2 class="text-5xl font-bold mb-8">AI-Powered Insights</h2>
+            <p class="text-xl mb-12 max-w-2xl">Experience your music in a whole new way with AI-powered insights that reveal unique patterns in your listening habits.</p>
+            <a href="https://newsroom.spotify.com/2024-12-04/make-this-years-spotify-wrapped-even-more-about-you-with-these-ai-experiences/" class="inline-block bg-spotify-green px-8 py-4 rounded-full text-lg hover:bg-opacity-80 transform hover:scale-105 transition-all">
+                Explore AI Features
+            </a>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-32 text-center bg-gradient-to-t from-spotify-green/20 to-spotify-black" data-aos="fade-up">
+        <h2 class="text-5xl font-bold mb-8">Ready to dive in?</h2>
+        <a href="https://spotify.com/wrapped" class="inline-block bg-spotify-green px-12 py-6 rounded-full text-xl hover:bg-opacity-80 transform hover:scale-105 transition-all">
+            Open Spotify
+        </a>
+    </section>
+
+    <!-- SEO Content Section -->
+    <section class="py-20 bg-gradient-to-b from-spotify-black to-black">
+        <div class="max-w-4xl mx-auto px-6">
+            <!-- Main Content Article -->
+            <article class="prose prose-invert max-w-none">
+                <!-- Overview Section -->
+                <div class="mb-20 text-center">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-spotify-green to-green-400 bg-clip-text text-transparent">
+                        Your Complete Guide to Spotify Wrapped 2024
+                    </h1>
+                    <p class="text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
+                        Spotify Wrapped 2024 transforms your year in music into an immersive journey of discovery, powered by advanced AI technology and enhanced personalization features. This comprehensive guide explores how Spotify Wrapped 2024 revolutionizes the way we reflect on our musical experiences, offering unprecedented insights into our listening habits and musical identity.
+                    </p>
                 </div>
-                <h1 class="wrapped-text mb-12">WRAPPED</h1>
-                <a href="https://open.spotify.com/wrapped" 
-                   class="bg-black text-white px-12 py-4 rounded-full font-bold text-lg transition-all duration-300 hover:scale-105 inline-block">
-                    Open in Spotify
-                </a>
-            </div>
-        </section>
-        <!-- 在 main 标签内添加新的部分 -->
-<section class="content-section min-h-screen">
-    <!-- 右侧固定目录 -->
-    <div class="content-menu">
-        <h2 class="text-xl font-bold mb-4">CONTENTS</h2>
-        <a href="#experience">2024 Wrapped Experience</a>
-        <a href="#trends">2024 Top Lists And Trends</a>
-        <a href="#ai">Wrapped AI Experiences</a>
-        <a href="#more">More On 2024 Wrapped</a>
-        <a href="#media">Media Kit</a>
-    </div>
 
-    <!-- 主要内容区域 -->
-    <div class="container mx-auto px-4">
-        <div class="max-w-3xl">
-            <p class="text-2xl font-light mb-12 leading-relaxed">
-                2024 Spotify Wrapped is all about celebrating the fans, 
-                artists, and creators who made this year the record-breaking, 
-                culture-making, fandom-shaking year it was.
-            </p>
-        </div>
-
-        <div class="wrapped-banner">
-            <span>CLICK HERE FOR YOUR WRAPPED</span>
-        </div>
-
-        <div class="mt-20">
-            <h2 class="text-red-500 text-6xl font-black mb-8 leading-tight">
-                Here's What's<br>
-                In Store for Your<br>
-                2024 Wrapped
-            </h2>
-        </div>
-    </div>
-</section>
-
-
-        <!-- 添加滚动触发动画的脚本 -->
-        <script>
-            const observerOptions = {
-                threshold: 0.1
-            };
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = "1";
-                        entry.target.style.transform = "translateY(0)";
-                    }
-                });
-            }, observerOptions);
-
-            document.querySelectorAll('.animate-fade-up').forEach(el => observer.observe(el));
-        </script>
-
-        <!-- 在 content-section 后添加新的内容区块 -->
-
-        <!-- 第一个内容块 - 绿色波浪背景 -->
-        <section class="min-h-screen bg-black relative overflow-hidden scroll-section" id="experience">
-            <div class="content-container container mx-auto px-4 py-20 relative z-10">
-                <h2 class="text-[#FF4632] text-7xl font-black leading-tight mb-8">
-                    Here's What's<br>
-                    In Store for Your<br>
-                    2024 Wrapped
-                </h2>
-                <a href="#" class="inline-block border border-[#FF4632] text-[#FF4632] px-6 py-2 rounded-full hover:bg-[#FF4632] hover:text-white transition-colors">
-                    READ MORE
-                </a>
-            </div>
-            <svg class="wave-shape" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0,400 C300,350 600,450 900,400 C1050,370 1150,350 1200,400 L1200,800 L0,800 Z" 
-                      fill="url(#greenGradient)">
-                    <animate attributeName="d" 
-                             dur="8s" 
-                             repeatCount="indefinite"
-                             values="M0,400 C300,350 600,450 900,400 C1050,370 1150,350 1200,400 L1200,800 L0,800 Z;
-                                    M0,350 C300,400 600,350 900,450 C1050,420 1150,400 1200,350 L1200,800 L0,800 Z;
-                                    M0,400 C300,350 600,450 900,400 C1050,370 1150,350 1200,400 L1200,800 L0,800 Z"/>
-                </path>
-                <defs>
-                    <linearGradient id="greenGradient" x1="0" y1="0" x2="1" y2="1">
-                        <stop offset="0%" stop-color="#1DB954"/>
-                        <stop offset="100%" stop-color="#1ed760"/>
-                    </linearGradient>
-                </defs>
-            </svg>
-        </section>
-
-        <!-- 第二个内容块 - 蓝色背景粉色几何图形 -->
-        <section class="min-h-screen bg-[#37B6E9] relative overflow-hidden scroll-section" id="trends">
-            <div class="content-container container mx-auto px-4 py-20 relative z-10">
-                <h2 class="text-black text-6xl font-black leading-tight max-w-2xl">
-                    The Top Lists and<br>
-                    Listening Trends of<br>
-                    2024 Revealed
-                </h2>
-                <a href="#" class="inline-block bg-black text-white px-6 py-2 rounded-full mt-8 hover:bg-opacity-80 transition-colors">
-                    READ MORE
-                </a>
-            </div>
-            <svg class="geometric-shape" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <g>
-                    <path d="M-100,200 C200,100 400,300 600,200 S800,300 1000,200 L1000,800 L-100,800 Z" 
-                          fill="#FF69B4" opacity="0.8">
-                        <animate attributeName="d" 
-                                 dur="6s" 
-                                 repeatCount="indefinite"
-                                 values="M-100,200 C200,100 400,300 600,200 S800,300 1000,200 L1000,800 L-100,800 Z;
-                                        M-100,150 C200,250 400,150 600,250 S800,150 1000,250 L1000,800 L-100,800 Z;
-                                        M-100,200 C200,100 400,300 600,200 S800,300 1000,200 L1000,800 L-100,800 Z"/>
-                    </path>
-                    <path d="M-100,300 C200,200 400,400 600,300 S800,400 1000,300 L1000,800 L-100,800 Z" 
-                          fill="#FF69B4" opacity="0.4">
-                        <animate attributeName="d" 
-                                 dur="8s" 
-                                 repeatCount="indefinite"
-                                 values="M-100,300 C200,200 400,400 600,300 S800,400 1000,300 L1000,800 L-100,800 Z;
-                                        M-100,250 C200,350 400,250 600,350 S800,250 1000,350 L1000,800 L-100,800 Z;
-                                        M-100,300 C200,200 400,400 600,300 S800,400 1000,300 L1000,800 L-100,800 Z"/>
-                    </path>
-                </g>
-            </svg>
-        </section>
-
-        <!-- 第三个内容块 - 黄色背景蓝色波浪 -->
-        <section class="min-h-screen bg-[#FFE100] relative overflow-hidden scroll-section" id="ai">
-            <div class="content-container container mx-auto px-4 py-20 relative z-10">
-                <h2 class="text-black text-6xl font-black leading-tight max-w-2xl">
-                    AI Experiences<br>
-                    Make Your 2024 Wrapped<br>
-                    Even More Personal
-                </h2>
-                <a href="#" class="inline-block bg-black text-[#FFE100] px-6 py-2 rounded-full mt-8 hover:bg-opacity-80 transition-colors">
-                    READ MORE
-                </a>
-            </div>
-            <svg class="ai-wave" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <g>
-                    <path d="M1200,0 C900,100 600,50 300,150 S0,300 0,400 L1200,400 Z" 
-                          fill="#37B6E9" opacity="0.8">
-                        <animate attributeName="d" 
-                                 dur="10s" 
-                                 repeatCount="indefinite"
-                                 values="M1200,0 C900,100 600,50 300,150 S0,300 0,400 L1200,400 Z;
-                                        M1200,0 C900,150 600,100 300,200 S0,250 0,400 L1200,400 Z;
-                                        M1200,0 C900,100 600,50 300,150 S0,300 0,400 L1200,400 Z"/>
-                    </path>
-                    <path d="M1200,100 C900,200 600,150 300,250 S0,400 0,500 L1200,500 Z" 
-                          fill="#4B25A9" opacity="0.6">
-                        <animate attributeName="d" 
-                                 dur="8s" 
-                                 repeatCount="indefinite"
-                                 values="M1200,100 C900,200 600,150 300,250 S0,400 0,500 L1200,500 Z;
-                                        M1200,100 C900,250 600,200 300,300 S0,350 0,500 L1200,500 Z;
-                                        M1200,100 C900,200 600,150 300,250 S0,400 0,500 L1200,500 Z"/>
-                    </path>
-                    <path d="M1200,200 C900,300 600,250 300,350 S0,500 0,600 L1200,600 Z" 
-                          fill="#4B25A9" opacity="0.4">
-                        <animate attributeName="d" 
-                                 dur="12s" 
-                                 repeatCount="indefinite"
-                                 values="M1200,200 C900,300 600,250 300,350 S0,500 0,600 L1200,600 Z;
-                                        M1200,200 C900,350 600,300 300,400 S0,450 0,600 L1200,600 Z;
-                                        M1200,200 C900,300 600,250 300,350 S0,500 0,600 L1200,600 Z"/>
-                    </path>
-                </g>
-            </svg>
-        </section>
-
-        <script>
-            // 优化后的滚动处理
-            const handleScroll = () => {
-                const sections = document.querySelectorAll('.scroll-section');
-                const viewportHeight = window.innerHeight;
-
-                sections.forEach(section => {
-                    const rect = section.getBoundingClientRect();
-                    const contentContainer = section.querySelector('.content-container');
+                <!-- What's New Section -->
+                <div class="mb-16 bg-white/5 rounded-2xl p-8 backdrop-blur-sm">
+                    <h2 class="text-3xl font-bold mb-6 flex items-center">
+                        <span class="w-10 h-10 rounded-full bg-spotify-green/20 flex items-center justify-center mr-4">
+                            <svg class="w-6 h-6 text-spotify-green" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"/>
+                            </svg>
+                        </span>
+                        Revolutionary Features in Spotify Wrapped 2024
+                    </h2>
                     
-                    // 计算元素在视口中的位置百分比
-                    const percentInView = 1 - (rect.top / viewportHeight);
-                    
-                    if (percentInView > 0 && percentInView < 1) {
-                        // 更平滑的视差效果
-                        const parallax = Math.min(Math.max(percentInView * 20, 0), 20);
-                        section.style.transform = `translate3d(0, ${parallax}px, 0)`;
-                        
-                        // 当内容进入视图时添加可见性
-                        if (contentContainer && rect.top < viewportHeight * 0.8) {
-                            contentContainer.classList.add('visible');
-                        }
-                    }
-                });
-            };
+                    <p class="mb-6 text-white/80 leading-relaxed">
+                        This year's Spotify Wrapped 2024 introduces groundbreaking features that set new standards in music streaming analytics. Through advanced machine learning algorithms and innovative data visualization techniques, users can explore their musical journey in unprecedented detail. The platform processes billions of streaming data points to create uniquely personalized stories that reflect each listener's individual relationship with music throughout the year.
+                    </p>
 
-            // 使用 requestAnimationFrame 优化滚动性能
-            let ticking = false;
-            window.addEventListener('scroll', () => {
-                if (!ticking) {
-                    window.requestAnimationFrame(() => {
-                        handleScroll();
-                        ticking = false;
-                    });
-                    ticking = true;
-                }
-            });
+                    <div class="grid md:grid-cols-2 gap-6 mb-8">
+                        <div class="bg-white/5 rounded-xl p-6">
+                            <h3 class="text-xl font-semibold mb-4 text-spotify-green">Core Innovations</h3>
+                            <ul class="space-y-4 text-white/80">
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-spotify-green mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                    </svg>
+                                    <div>
+                                        <span class="font-semibold">Sound Town Matching:</span>
+                                        <p class="mt-1">Spotify Wrapped 2024 connects your unique listening patterns with cities worldwide, revealing where your music taste would feel most at home.</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-spotify-green mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                    </svg>
+                                    <div>
+                                        <span class="font-semibold">Listening Personality Analysis:</span>
+                                        <p class="mt-1">Advanced AI algorithms analyze your listening habits to create a detailed profile of your music personality in Spotify Wrapped 2024.</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-spotify-green mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                    </svg>
+                                    <div>
+                                        <span class="font-semibold">Interactive Genre Explorer:</span>
+                                        <p class="mt-1">Discover how your genre preferences evolved throughout the year with Spotify Wrapped 2024's dynamic visualization tools.</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
 
-            // 初始化时触发一次
-            handleScroll();
-        </script>
-    </main>
+                        <div class="bg-white/5 rounded-xl p-6">
+                            <h3 class="text-xl font-semibold mb-4 text-spotify-green">Enhanced Experience</h3>
+                            <ul class="space-y-4 text-white/80">
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-spotify-green mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                    </svg>
+                                    <div>
+                                        <span class="font-semibold">Personalized Stories:</span>
+                                        <p class="mt-1">Each element of Spotify Wrapped 2024 is crafted to tell your unique musical story through immersive, shareable formats.</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-spotify-green mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                    </svg>
+                                    <div>
+                                        <span class="font-semibold">Social Integration:</span>
+                                        <p class="mt-1">Enhanced sharing capabilities let you showcase your Spotify Wrapped 2024 journey across all major social platforms.</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-spotify-green mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                    </svg>
+                                    <div>
+                                        <span class="font-semibold">Custom Playlists:</span>
+                                        <p class="mt-1">Automatically generated playlists based on your Spotify Wrapped 2024 insights, featuring your top tracks and discoveries.</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
 
-    <!-- 页脚 -->
-    <footer class="bg-zinc-900 py-20">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div>
-                    <h4 class="font-bold mb-4">Communities</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="#" class="hover:text-white">For Users</a></li>
-                        <li><a href="#" class="hover:text-white">For Creators</a></li>
-                        <li><a href="#" class="hover:text-white">For Advertisers</a></li>
-                    </ul>
+                    <div class="bg-gradient-to-r from-spotify-green/20 to-transparent p-6 rounded-xl">
+                        <h4 class="text-lg font-semibold mb-3">Expert Insight</h4>
+                        <p class="text-white/80">
+                            "Spotify Wrapped 2024 represents a quantum leap in how we understand and interact with our musical preferences. The platform's sophisticated AI algorithms process over 100 billion data points to create deeply personalized experiences for each user." - Spotify Data Science Team
+                        </p>
+                    </div>
                 </div>
-                <div>
-                    <h4 class="font-bold mb-4">Company</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="#" class="hover:text-white">About</a></li>
-                        <li><a href="#" class="hover:text-white">Jobs</a></li>
-                        <li><a href="#" class="hover:text-white">Contact</a></li>
-                    </ul>
+
+                <!-- Global Impact Section -->
+                <div class="mb-16 bg-white/5 rounded-2xl p-8 backdrop-blur-sm">
+                    <h2 class="text-3xl font-bold mb-6 flex items-center">
+                        <span class="w-10 h-10 rounded-full bg-spotify-green/20 flex items-center justify-center mr-4">
+                            <svg class="w-6 h-6 text-spotify-green" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"/>
+                            </svg>
+                        </span>
+                        Global Music Trends in Spotify Wrapped 2024
+                    </h2>
+
+                    <p class="mb-6 text-white/80 leading-relaxed">
+                        Spotify Wrapped 2024 reveals fascinating insights into global music consumption patterns. This year's data showcases unprecedented streaming milestones and emerging musical trends that shaped the industry. From record-breaking artists to breakthrough genres, Spotify Wrapped 2024 captures the dynamic evolution of music culture worldwide.
+                    </p>
+
+                    <!-- Global Stats Grid -->
+                    <div class="grid md:grid-cols-2 gap-6 mb-8">
+                        <div class="bg-white/5 rounded-xl p-6">
+                            <h3 class="text-xl font-semibold mb-4 text-spotify-green">Record-Breaking Achievements</h3>
+                            <ul class="space-y-4 text-white/80">
+                                <li class="flex items-start">
+                                    <span class="w-6 h-6 rounded-full bg-spotify-green/20 flex items-center justify-center mr-3 text-sm">1</span>
+                                    <div>
+                                        <span class="font-semibold">Taylor Swift</span>
+                                        <p class="mt-1">Spotify Wrapped 2024 reveals unprecedented 26.6 billion streams globally, setting a new industry record.</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="w-6 h-6 rounded-full bg-spotify-green/20 flex items-center justify-center mr-3 text-sm">2</span>
+                                    <div>
+                                        <span class="font-semibold">Bad Bunny</span>
+                                        <p class="mt-1">Dominating Latin music with 22.3 billion streams in Spotify Wrapped 2024's global rankings.</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="w-6 h-6 rounded-full bg-spotify-green/20 flex items-center justify-center mr-3 text-sm">3</span>
+                                    <div>
+                                        <span class="font-semibold">The Weeknd</span>
+                                        <p class="mt-1">Achieving 21.1 billion streams across multiple genres in Spotify Wrapped 2024.</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-white/5 rounded-xl p-6">
+                            <h3 class="text-xl font-semibold mb-4 text-spotify-green">Emerging Trends</h3>
+                            <ul class="space-y-4 text-white/80">
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-spotify-green mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                    </svg>
+                                    <div>
+                                        <span class="font-semibold">Genre Blending:</span>
+                                        <p class="mt-1">Spotify Wrapped 2024 highlights unprecedented cross-genre collaborations and musical fusion.</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-spotify-green mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                    </svg>
+                                    <div>
+                                        <span class="font-semibold">Regional Influences:</span>
+                                        <p class="mt-1">Local sounds gaining global recognition through Spotify Wrapped 2024's discovery features.</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-spotify-green mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                    </svg>
+                                    <div>
+                                        <span class="font-semibold">Digital Evolution:</span>
+                                        <p class="mt-1">New streaming patterns revealed through Spotify Wrapped 2024's advanced analytics.</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bg-gradient-to-r from-spotify-green/20 to-transparent p-6 rounded-xl mb-8">
+                        <h4 class="text-lg font-semibold mb-3">Industry Impact</h4>
+                        <p class="text-white/80">
+                            Spotify Wrapped 2024's comprehensive data analysis reveals transformative trends in music consumption, influencing industry strategies and artist development worldwide. The platform's insights have become a crucial tool for understanding global music preferences and cultural shifts.
+                        </p>
+                    </div>
                 </div>
-            </div>
-            <div class="mt-20 pt-8 border-t border-zinc-800 text-gray-400 text-sm">
-                © 2024 Your Brand. All rights reserved.
+
+                <!-- AI Innovation Section -->
+                <div class="mb-16 bg-white/5 rounded-2xl p-8 backdrop-blur-sm">
+                    <h2 class="text-3xl font-bold mb-6 flex items-center">
+                        <span class="w-10 h-10 rounded-full bg-spotify-green/20 flex items-center justify-center mr-4">
+                            <svg class="w-6 h-6 text-spotify-green" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"/>
+                            </svg>
+                        </span>
+                        Advanced AI Features in Spotify Wrapped 2024
+                    </h2>
+
+                    <p class="mb-6 text-white/80 leading-relaxed">
+                        Spotify Wrapped 2024 leverages cutting-edge artificial intelligence to transform your listening data into meaningful insights. Through sophisticated machine learning algorithms and natural language processing, the platform creates a deeply personalized experience that goes beyond simple statistics.
+                    </p>
+
+                    <div class="grid md:grid-cols-2 gap-6 mb-8">
+                        <div class="bg-white/5 rounded-xl p-6">
+                            <h3 class="text-xl font-semibold mb-4 text-spotify-green">AI-Powered Analysis</h3>
+                            <ul class="space-y-4 text-white/80">
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-spotify-green mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                    </svg>
+                                    <div>
+                                        <span class="font-semibold">Emotional Journey Mapping:</span>
+                                        <p class="mt-1">Spotify Wrapped 2024's AI analyzes your listening patterns to create a detailed emotional landscape.</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-spotify-green mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                    </svg>
+                                    <div>
+                                        <span class="font-semibold">Genre DNA Analysis:</span>
+                                        <p class="mt-1">Advanced algorithms in Spotify Wrapped 2024 decode your unique genre combinations.</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-spotify-green mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                    </svg>
+                                    <div>
+                                        <span class="font-semibold">Predictive Recommendations:</span>
+                                        <p class="mt-1">AI-driven suggestions based on your Spotify Wrapped 2024 insights.</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-white/5 rounded-xl p-6">
+                            <h3 class="text-xl font-semibold mb-4 text-spotify-green">Personalization Features</h3>
+                            <ul class="space-y-4 text-white/80">
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-spotify-green mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                    </svg>
+                                    <div>
+                                        <span class="font-semibold">AI DJ Integration:</span>
+                                        <p class="mt-1">Spotify Wrapped 2024 introduces personalized commentary on your music journey through AI-powered DJ insights.</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-spotify-green mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                    </svg>
+                                    <div>
+                                        <span class="font-semibold">Listening Pattern Recognition:</span>
+                                        <p class="mt-1">Advanced behavioral analysis in Spotify Wrapped 2024 reveals unique listening habits and preferences.</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-spotify-green mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                    </svg>
+                                    <div>
+                                        <span class="font-semibold">Custom Story Generation:</span>
+                                        <p class="mt-1">AI-crafted narratives that bring your Spotify Wrapped 2024 experience to life.</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bg-gradient-to-r from-spotify-green/20 to-transparent p-6 rounded-xl">
+                        <h4 class="text-lg font-semibold mb-3">Technology Impact</h4>
+                        <p class="text-white/80">
+                            The AI innovations in Spotify Wrapped 2024 represent a significant leap forward in music streaming technology. By processing over 100 billion data points daily, these features create uniquely personalized experiences that deepen user engagement and understanding of their musical preferences.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- User Experience Section -->
+                <div class="mb-16 bg-white/5 rounded-2xl p-8 backdrop-blur-sm">
+                    <h2 class="text-3xl font-bold mb-6 flex items-center">
+                        <span class="w-10 h-10 rounded-full bg-spotify-green/20 flex items-center justify-center mr-4">
+                            <svg class="w-6 h-6 text-spotify-green" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"/>
+                            </svg>
+                        </span>
+                        Maximizing Your Spotify Wrapped 2024 Experience
+                    </h2>
+
+                    <p class="mb-6 text-white/80 leading-relaxed">
+                        To fully experience the enhanced features of Spotify Wrapped 2024, users can follow these expert recommendations and best practices. Each element has been designed to provide deeper insights into your musical journey while maintaining an engaging and shareable format.
+                    </p>
+
+                    <div class="grid md:grid-cols-2 gap-6 mb-8">
+                        <div class="bg-white/5 rounded-xl p-6">
+                            <h3 class="text-xl font-semibold mb-4 text-spotify-green">Getting Started</h3>
+                            <ul class="space-y-4 text-white/80">
+                                <li class="flex items-start">
+                                    <span class="w-6 h-6 rounded-full bg-spotify-green/20 flex items-center justify-center mr-3 text-sm">1</span>
+                                    <div>
+                                        <span class="font-semibold">Update Your App:</span>
+                                        <p class="mt-1">Ensure you have the latest version to access all Spotify Wrapped 2024 features.</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="w-6 h-6 rounded-full bg-spotify-green/20 flex items-center justify-center mr-3 text-sm">2</span>
+                                    <div>
+                                        <span class="font-semibold">Enable Notifications:</span>
+                                        <p class="mt-1">Stay updated with your Spotify Wrapped 2024 insights throughout the year.</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="w-6 h-6 rounded-full bg-spotify-green/20 flex items-center justify-center mr-3 text-sm">3</span>
+                                    <div>
+                                        <span class="font-semibold">Explore All Features:</span>
+                                        <p class="mt-1">Take time to discover each new element of Spotify Wrapped 2024.</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-white/5 rounded-xl p-6">
+                            <h3 class="text-xl font-semibold mb-4 text-spotify-green">Pro Tips</h3>
+                            <ul class="space-y-4 text-white/80">
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-spotify-green mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                    </svg>
+                                    <div>
+                                        <span class="font-semibold">Share Creatively:</span>
+                                        <p class="mt-1">Utilize Spotify Wrapped 2024's enhanced sharing options for social media.</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-spotify-green mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                    </svg>
+                                    <div>
+                                        <span class="font-semibold">Save Your Stats:</span>
+                                        <p class="mt-1">Download your Spotify Wrapped 2024 insights for future reference.</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-spotify-green mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                    </svg>
+                                    <div>
+                                        <span class="font-semibold">Connect with Friends:</span>
+                                        <p class="mt-1">Compare your Spotify Wrapped 2024 results with friends and discover new music.</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Future Outlook Section -->
+                <div class="mb-16 bg-white/5 rounded-2xl p-8 backdrop-blur-sm">
+                    <h2 class="text-3xl font-bold mb-6 flex items-center">
+                        <span class="w-10 h-10 rounded-full bg-spotify-green/20 flex items-center justify-center mr-4">
+                            <svg class="w-6 h-6 text-spotify-green" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clip-rule="evenodd"/>
+                            </svg>
+                        </span>
+                        The Future of Spotify Wrapped
+                    </h2>
+
+                    <p class="mb-6 text-white/80 leading-relaxed">
+                        As we look beyond Spotify Wrapped 2024, the platform continues to innovate and evolve. Future updates promise even more personalized experiences, deeper insights, and enhanced ways to connect through music. Stay tuned for ongoing improvements and new features throughout the year.
+                    </p>
+
+                    <div class="bg-gradient-to-r from-spotify-green/20 to-transparent p-6 rounded-xl">
+                        <h4 class="text-lg font-semibold mb-3">Looking Ahead</h4>
+                        <p class="text-white/80">
+                            Spotify Wrapped 2024 sets the stage for future innovations in music streaming technology. With continuous updates and improvements, users can look forward to an ever-evolving platform that enhances their musical journey throughout the year and beyond.
+                        </p>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-black text-white py-16">
+        <div class="max-w-7xl mx-auto px-6">
+            <!-- Communities Section -->
+            <div class="mb-12">
+                <h3 class="text-lg font-bold mb-6">COMMUNITIES</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Column 1 -->
+                    <div class="space-y-4">
+                        <a href="https://artists.spotify.com/" class="flex items-center space-x-4 hover:text-spotify-green transition-colors">
+                            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+                                    <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+                                </svg>
+                            </div>
+                            <span>For Artists</span>
+                        </a>
+                        <a href="https://podcasters.spotify.com/" class="flex items-center space-x-4 hover:text-spotify-green transition-colors">
+                            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+                                </svg>
+                            </div>
+                            <span>For Creators</span>
+                        </a>
+                        <a href="https://ads.spotify.com/en-US/" class="flex items-center space-x-4 hover:text-spotify-green transition-colors">
+                            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2z"/>
+                                </svg>
+                            </div>
+                            <span>For Advertisers</span>
+                        </a>
+                        <a href="https://www.lifeatspotify.com/" class="flex items-center space-x-4 hover:text-spotify-green transition-colors">
+                            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+                                </svg>
+                            </div>
+                            <span>Life at Spotify</span>
+                        </a>
+                        <a href="https://spotify.design/" class="flex items-center space-x-4 hover:text-spotify-green transition-colors">
+                            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
+                                </svg>
+                            </div>
+                            <span>For Design</span>
+                        </a>
+                    </div>
+
+                    <!-- Column 2 -->
+                    <div class="space-y-4">
+                        <a href="https://engineering.atspotify.com/" class="flex items-center space-x-4 hover:text-spotify-green transition-colors">
+                            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.07.62-.07.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/>
+                                </svg>
+                            </div>
+                            <span>For Engineering</span>
+                        </a>
+                        <a href="https://spotifyforvendors.com/" class="flex items-center space-x-4 hover:text-spotify-green transition-colors">
+                            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+                                </svg>
+                            </div>
+                            <span>For Vendors</span>
+                        </a>
+                        <a href="https://noteable.spotify.com/" class="flex items-center space-x-4 hover:text-spotify-green transition-colors">
+                            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/>
+                                </svg>
+                            </div>
+                            <span>For Songwriters</span>
+                        </a>
+                        <a href="https://investors.spotify.com/home/default.aspx" class="flex items-center space-x-4 hover:text-spotify-green transition-colors">
+                            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+                                </svg>
+                            </div>
+                            <span>For Investors</span>
+                        </a>
+                        <a href="https://community.spotify.com/" class="flex items-center space-x-4 hover:text-spotify-green transition-colors">
+                            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
+                                </svg>
+                            </div>
+                            <span>For Help, Chat & Ideas</span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </footer>
+
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+    </script>
+    <style>
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        .floating-notes svg {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-notes svg:nth-child(2n) {
+            animation-delay: -2s;
+        }
+
+        .floating-notes svg:nth-child(3n) {
+            animation-delay: -4s;
+        }
+    </style>
 </body>
 </html>
